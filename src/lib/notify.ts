@@ -7,11 +7,9 @@
  */
 import { and, eq, isNull, sql } from "drizzle-orm";
 import { db } from "@/db";
-import { notifications, pairs as _pairs, pairings, periods, reminderPreferences, users, type NotificationKind } from "@/db/schema";
+import { notifications, pairings, periods, reminderPreferences, users, type NotificationKind } from "@/db/schema";
 import { getEnv } from "./env";
 import { predictNextPeriod } from "./cycle";
-
-void _pairs;
 
 export type CreateNotification = {
   userId: string;

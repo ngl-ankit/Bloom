@@ -1,27 +1,17 @@
-"use client";
+import { Suspense } from "react";
+import { ResetForm } from "./form";
 
-import { useActionState } from "react";
-import { resetPasswordAction } from "@/actions/auth";
-import { useSearchParams } from "next/navigation";
+export const dynamic = "force-dynamic";
 
-export default function ResetPasswordPage() {
-  const params = useSearchParams();
-  const [state, action, pending] = useActionState(resetPasswordAction, null);
+export default async function ResetPasswordPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ token?: string }>;
+}) {
+  const sp = await searchParams;
   return (
-    <main id="main" className="min-h-dvh petal-bg flex items-center justify-center px-4 py-12">
-      <div className="card w-full max-w-md p-8 rise">
-        <h1 className="font-display text-2xl text-center">Choose a new password</h1>
-        <p className="muted text-sm text-center mt-2 mb-6">Make it long and memorable — 10+ characters.</p>
-        <form action={action}>
-          <input type="hidden" name="token" value={params.get("token") ?? ""} />
-          <div className="mb-4">
-            <label className="label" htmlFor="password">New password</label>
-            <input className="input" id="password" name="password" type="password" required minLength={10} autoComplete="new-password" />
-          </div>
-          {state?.error && <p className="text-sm mb-4 px-3 py-2 rounded-xl border border-[rgb(var(--accent))] surface-2" role="alert">{state.error}</p>}
-          <button className="btn btn-primary w-full" disabled={pending}>{pending ? "Saving…" : "Set new password"}</button>
-        </form>
-      </div>
-    </main>
+    <Suspense fallback={null}>
+      <ResetForm token={sp.token ?? ""} />
+    </Suspense>
   );
 }

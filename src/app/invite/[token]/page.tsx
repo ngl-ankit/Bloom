@@ -44,7 +44,7 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
           <>
             <h1 className="font-display text-2xl">You're invited 💞</h1>
             <p className="muted text-sm mt-3">{inviterName} invited you to be their trusted person.</p>
-            {invite.message && <p className="text-sm mt-3 surface-2 rounded-2xl p-4">“{invite.message}”</p>}
+            {invite?.message && <p className="text-sm mt-3 surface-2 rounded-2xl p-4">“{invite.message}”</p>}
             <p className="text-xs muted mt-4">
               Accepting creates the pairing, but nothing is shared until they choose permissions — and either of you can disconnect anytime.
               Your care dashboard will show only what is explicitly allowed.

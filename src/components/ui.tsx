@@ -4,7 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useId, useState } fr
 
 // Tiny reusable client UI kit (buttons/inputs are CSS classes in globals.css).
 
-export function Field({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
+export function Field({ label, hint, children }: { label: string; hint?: string; children: (id: string) => React.ReactNode }) {
   const id = useId();
   return (
     <div className="mb-4">

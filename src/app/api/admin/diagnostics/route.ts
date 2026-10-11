@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sql } from "drizzle-orm";
 import { db } from "@/db";
-import { getEnv } from "@/lib/env";
-import { isAiConfigured } from "@/lib/ai";
+import { getEnv, isAiConfigured } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
 

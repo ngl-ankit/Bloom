@@ -20,7 +20,7 @@ const LINKS = [
 
 const PRIMARY = new Set(["/dashboard", "/calendar", "/journal", "/companion"]);
 
-export function AppShell({ name, unread, logout }: { name: string; unread: number; logout: React.ReactNode }) {
+export function AppShell({ name, unread, logout, children }: { name: string; unread: number; logout: React.ReactNode; children: React.ReactNode }) {
   const pathname = usePathname();
   const active = (href: string) => pathname === href || pathname.startsWith(href + "/");
   const bottom = LINKS.filter((l) => PRIMARY.has(l.href));

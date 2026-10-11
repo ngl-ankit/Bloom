@@ -26,7 +26,6 @@ export default async function PartnerPage() {
 
   return (
     <PartnerClient
-      meId={user.id}
       invitations={myInvites.map((i) => ({
         id: i.id, email: i.email, status: i.status, createdAt: i.createdAt.toISOString(), expiresAt: i.expiresAt.toISOString(),
       }))}
