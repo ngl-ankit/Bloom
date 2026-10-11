@@ -1,60 +1,51 @@
-# Render Blueprint for Bloom — validated against https://render.com/docs/blueprint-spec
-# Deploy: Render Dashboard → New → Blueprint → select this repository.
-# Secrets declared with sync:false are prompted securely at deploy time.
 services:
   - type: web
     name: bloom-web
     runtime: node
-    plan: starter            # change to "free" for a free (sleeping) instance
+    plan: free
     buildCommand: npm ci && npm run build
     startCommand: npm run start
-    preDeployCommand: npm run db:migrate   # migrations run after build, before start
     healthCheckPath: /api/healthz
     autoDeploy: true
     envVars:
       - key: NODE_VERSION
         value: "22"
-      - key: DATABASE_URL      # injected from the database declared below
+
+      - key: DATABASE_URL
         fromDatabase:
           name: bloom-db
           property: connectionString
-      - key: APP_URL
-        value: https://bloom-web.onrender.com   # adjust after first deploy
-      - key: SESSION_SECRET
-        generateValue: true
-      - key: AI_PROVIDER_BASE_URL
-        sync: false
-      - key: AI_PROVIDER_API_KEY
-        sync: false
-      - key: AI_PROVIDER_MODEL
-        value: grok-3-mini
-      - key: EMAIL_API_KEY
-        sync: false
-      - key: EMAIL_FROM
-        sync: false
-      - key: CRON_SECRET
-        generateValue: true
-      - key: ADMIN_TOKEN
-        sync: false
 
-  # Nightly reminder sweep (period reminders, quiet-hours aware, idempotent).
-  # Cron jobs require a paid workspace on Render; if you are on free, call
-  # GET /api/cron/reminders from any external scheduler with the CRON_SECRET.
-  - type: cron
-    name: bloom-reminders
-    runtime: node
-    schedule: "0 14 * * *"   # 14:00 UTC daily
-    buildCommand: npm ci
-    startCommand: node -e "fetch(process.env.APP_URL + '/api/cron/reminders', { headers: { authorization: 'Bearer ' + process.env.CRON_SECRET } }).then(r => r.text()).then(t => { console.log(t); if (!r.ok) process.exit(1); })"
-    envVars:
-      - key: NODE_VERSION
-        value: "22"
       - key: APP_URL
         value: https://bloom-web.onrender.com
+
+      - key: SESSION_SECRET
+        generateValue: true
+
+      - key: AI_PROVIDER_BASE_URL
+        sync: false
+
+      - key: AI_PROVIDER_API_KEY
+        sync: false
+
+      - key: AI_PROVIDER_MODEL
+        value: grok-3-mini
+
+      - key: EMAIL_API_KEY
+        sync: false
+
+      - key: EMAIL_FROM
+        sync: false
+
       - key: CRON_SECRET
+        generateValue: true
+
+      - key: ADMIN_TOKEN
         sync: false
 
 databases:
   - name: bloom-db
-    plan: basic-256mb        # smallest persistent Postgres plan; free tier expires
+    plan: free
+    databaseName: bloom
+    user: bloom_user
     postgresMajorVersion: "16"
