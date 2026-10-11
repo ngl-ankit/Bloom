@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bloomGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7a8c4"/>
+      <stop offset="50%" stop-color="#e08fb0"/>
+      <stop offset="100%" stop-color="#b49cd6"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="32" fill="url(#bloomGradient)"/>
+  <g fill="#fff" fill-opacity="0.92">
+    <path d="M32 14c4 0 7 4 7 8.5S36 30 32 30s-7-3-7-7.5S28 14 32 14z"/>
+    <path d="M32 50c-4 0-7-4-7-8.5S28 34 32 34s7 3 7 7.5S36 50 32 50z"/>
+    <path d="M14 32c0-4 4-7 8.5-7S30 28 30 32s-3 7-7.5 7S14 36 14 32z"/>
+    <path d="M50 32c0 4-4 7-8.5 7S34 36 34 32s3-7 7.5-7S50 28 50 32z"/>
+  </g>
+  <circle cx="32" cy="32" r="6" fill="#fff"/>
+</svg>
