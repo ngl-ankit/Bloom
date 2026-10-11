@@ -73,7 +73,7 @@ export default function LearnPage() {
         Calm, judgment-free explainers. General education only — never a diagnosis or a replacement for care.
       </p>
       {ARTICLES.length === 0 ? (
-        <EmptyState icon="📚" title="Library coming soon" body="Educational content will live here." />
+        <EmptyState icon="book" title="Library coming soon" body="Educational content will live here." />
       ) : (
         <div className="space-y-4">
           {ARTICLES.map((a) => (

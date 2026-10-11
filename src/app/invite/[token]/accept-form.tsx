@@ -16,7 +16,7 @@ export function AcceptForm({ token }: { token: string }) {
         setBusy(true);
         try {
           await api("/api/pairing/accept", { method: "POST", body: JSON.stringify({ token }) });
-          toast("Pairing created 🤍 They can now choose what to share.");
+          toast("Pairing created They can now choose what to share.");
           router.push("/care");
         } catch (e) {
           toast(e instanceof Error ? e.message : "Couldn't accept", "err");

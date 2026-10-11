@@ -1,3 +1,4 @@
+import { Icon } from "@/components/icon";
 import { isAiConfigured } from "@/lib/env";
 import { requireUser } from "@/lib/session";
 import { CompanionClient } from "./client";
@@ -15,7 +16,7 @@ export default async function CompanionPage() {
       </p>
       {!aiReady && (
         <p className="text-sm surface-2 rounded-2xl border border-[rgb(var(--line))] px-4 py-3 mb-6">
-          🌱 The companion is in <strong>offline mode</strong> right now (no AI provider configured on this deployment).
+          <Icon name="sprout" size={18} className="mr-1" /> The companion is in <strong>offline mode</strong> right now (no AI provider configured on this deployment).
           It can still offer a few gentle, general suggestions — and every other Bloom feature works fully.
         </p>
       )}

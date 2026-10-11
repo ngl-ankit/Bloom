@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@/components/icon";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { EmptyState, useToast, api } from "@/components/ui";
@@ -86,7 +87,7 @@ export function CravingsClient({ cravings: initialCravings, profile: initialProf
       });
       setCravings((c) => [craving, ...c]);
       setItem(""); setShare(false);
-      toast("Craving logged 🍫");
+      toast("Craving logged");
       router.refresh();
     } catch (e) {
       toast(e instanceof Error ? e.message : "Couldn't save", "err");
@@ -108,7 +109,7 @@ export function CravingsClient({ cravings: initialCravings, profile: initialProf
     setBusy(true);
     try {
       await api("/api/comfort-profile", { method: "POST", body: JSON.stringify(profile) });
-      toast("Care profile saved 🌷");
+      toast("Care profile saved");
       setProfileSaved(true);
       router.refresh();
     } catch (e) {
@@ -148,7 +149,7 @@ export function CravingsClient({ cravings: initialCravings, profile: initialProf
       <section aria-label="Logged cravings" className="mb-10">
         <h2 className="font-display text-2xl mb-4">Logged cravings</h2>
         {cravings.length === 0 ? (
-          <EmptyState icon="🍫" title="Nothing logged yet" body="When a craving strikes, jot it here — for yourself, or to drop a hint." />
+          <EmptyState icon="cookie" title="Nothing logged yet" body="When a craving strikes, jot it here — for yourself, or to drop a hint." />
         ) : (
           <ul className="grid sm:grid-cols-2 gap-3">
             {cravings.map((c) => (
@@ -157,7 +158,7 @@ export function CravingsClient({ cravings: initialCravings, profile: initialProf
                   <p className="text-sm font-semibold">{c.item}</p>
                   <p className="text-xs muted mt-0.5">{c.category}{c.shareWithPartner ? " · shared with trusted person" : " · private"}</p>
                 </div>
-                <button className="btn-ghost btn !p-1.5 !min-h-0 text-xs" aria-label={`Delete craving ${c.item}`} onClick={() => removeCraving(c.id)}>🗑</button>
+                <button className="btn-ghost btn !p-1.5 !min-h-0 text-xs" aria-label={`Delete craving ${c.item}`} onClick={() => removeCraving(c.id)}><Icon name="trash" size={16} /></button>
               </li>
             ))}
           </ul>

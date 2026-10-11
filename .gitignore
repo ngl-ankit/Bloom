@@ -31,3 +31,7 @@ yarn-error.log*
 # editors
 .vscode/
 .idea/
+
+# Local validation tools and isolated test database
+.qa/
+.cache/

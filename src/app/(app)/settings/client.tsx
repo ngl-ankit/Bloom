@@ -20,7 +20,7 @@ export function SettingsClient({ user, hasReminderPrefs }: { user: UserMeta; has
     setBusy(true);
     try {
       await api("/api/profile", { method: "POST", body: JSON.stringify({ displayName: name, timezone: tz, theme: user.theme as "light" | "dark" | "system" }) });
-      toast("Profile saved 🌷");
+      toast("Profile saved");
       router.refresh();
     } catch (e) {
       toast(e instanceof Error ? e.message : "Couldn't save", "err");

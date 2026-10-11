@@ -41,12 +41,12 @@ async function waitForServer() {
   return false;
 }
 
-const server = spawn("npm", ["run", "start"], {
+const server = process.env.BASE_URL ? null : spawn("npm", ["run", "start"], {
   env: { ...process.env, DATABASE_URL: process.env.DATABASE_URL },
   stdio: ["ignore", "pipe", "pipe"],
 });
-server.stdout.on("data", (d) => process.env.VERBOSE && console.log(String(d)));
-server.stderr.on("data", (d) => console.error(String(d)));
+server?.stdout.on("data", (d) => process.env.VERBOSE && console.log(String(d)));
+server?.stderr.on("data", (d) => console.error(String(d)));
 
 try {
   console.log("Waiting for server…");
@@ -67,7 +67,7 @@ try {
   check("duplicate email rejected (409)", dup.status === 409);
 
   const badPw = await req("/api/auth/register", { method: "POST", body: { email: `x${stamp}@t.io`, password: "short", displayName: "X", timezone: "UTC" } });
-  check("weak password rejected (400)", badPw.status === 400 || badPw.status === 500);
+  check("weak password rejected (400)", badPw.status === 400);
 
   const login = await req("/api/auth/login", { method: "POST", body: { email: A.email, password: A.pw } });
   check("login A works", login.status === 200 && Boolean(login.cookie));
@@ -169,7 +169,7 @@ try {
   failCount += 1;
   console.error("\nUnexpected suite error:", e);
 } finally {
-  server.kill("SIGTERM");
+  server?.kill("SIGTERM");
 }
 
 console.log(`\n═══ Integration results: ${pass} passed, ${failCount} failed ═══`);

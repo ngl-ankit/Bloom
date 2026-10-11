@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon, type IconName } from "@/components/icon";
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast, api } from "@/components/ui";
@@ -49,10 +50,10 @@ export function ChecklistClient({ initial }: { initial: Item[] }) {
     }
   }
 
-  function List({ title, data, icon }: { title: string; data: Item[]; icon: string }) {
+  function List({ title, data, icon }: { title: string; data: Item[]; icon: IconName }) {
     return (
       <section className="card p-6 mb-4" aria-label={title}>
-        <h2 className="font-display text-xl mb-4">{icon} {title}</h2>
+        <h2 className="font-display text-xl mb-4"><Icon name={icon} className="mr-2 text-[rgb(var(--accent))]" /> {title}</h2>
         <ul className="space-y-2">
           {data.map((i) => (
             <li key={i.id} className="flex items-center gap-3 surface-2 rounded-xl px-3 py-2.5">
@@ -80,8 +81,8 @@ export function ChecklistClient({ initial }: { initial: Item[] }) {
         </div>
       )}
 
-      <List title="Period preparation" data={prep} icon="🧺" />
-      <List title="Emergency kit" data={emergency} icon="🩹" />
+      <List title="Period preparation" data={prep} icon="checklist" />
+      <List title="Emergency kit" data={emergency} icon="bandage" />
 
       <section className="card p-6" aria-label="Add item">
         <h2 className="font-display text-xl mb-4">Add your own</h2>

@@ -4,6 +4,7 @@ services:
     runtime: node
     plan: free
     buildCommand: npm ci && npm run build
+    # npm prestart applies migrations; works on free plans without preDeployCommand.
     startCommand: npm run start
     healthCheckPath: /api/healthz
     autoDeploy: true

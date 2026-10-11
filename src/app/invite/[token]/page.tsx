@@ -1,3 +1,4 @@
+import { Icon } from "@/components/icon";
 import { and, eq, gt } from "drizzle-orm";
 import Link from "next/link";
 import { db } from "@/db";
@@ -29,7 +30,7 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
   return (
     <main id="main" className="petal-bg min-h-dvh flex items-center justify-center px-4 py-12">
       <div className="card w-full max-w-md p-8 text-center rise">
-        <div className="text-4xl mb-3" aria-hidden>{valid ? "💌" : "🥀"}</div>
+        <div className="mb-3 text-[rgb(var(--accent))]"><Icon name={valid ? "mail" : "alert"} size={36} /></div>
         {!viewer ? (
           <>
             <h1 className="font-display text-2xl">A care invitation</h1>
@@ -42,7 +43,7 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
           </>
         ) : valid ? (
           <>
-            <h1 className="font-display text-2xl">You're invited 💞</h1>
+            <h1 className="font-display text-2xl">You're invited</h1>
             <p className="muted text-sm mt-3">{inviterName} invited you to be their trusted person.</p>
             {invite?.message && <p className="text-sm mt-3 surface-2 rounded-2xl p-4">“{invite.message}”</p>}
             <p className="text-xs muted mt-4">

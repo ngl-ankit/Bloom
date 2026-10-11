@@ -28,12 +28,12 @@ export function CareClient({ permissions, view }: { permissions: Perms; view: Vi
       </p>
 
       {!anythingShared && (
-        <EmptyState icon="🤍" title="They haven't shared anything yet" body="Pairing is connected, but every category starts private. You'll see care ideas here if they choose to share." />
+        <EmptyState icon="heart" title="They haven't shared anything yet" body="Pairing is connected, but every category starts private. You'll see care ideas here if they choose to share." />
       )}
 
       {view.periodEstimates && (
         <section className="card p-6 mb-4" aria-label="Upcoming period estimate">
-          <h2 className="font-display text-xl mb-2">Upcoming days 🌙</h2>
+          <h2 className="font-display text-xl mb-2">Upcoming days</h2>
           {view.periodEstimates.nextPeriodStart ? (
             <>
               <p className="text-sm">Their next period is <strong>estimated around {view.periodEstimates.nextPeriodStart}</strong>.</p>

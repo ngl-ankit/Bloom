@@ -42,7 +42,7 @@ export default async function DashboardPage() {
     <div className="rise">
       <div className="flex flex-wrap items-end justify-between gap-3 mb-6">
         <div>
-          <h1 className="font-display text-3xl">Hello, {user.displayName} 🌸</h1>
+          <h1 className="font-display text-3xl">Hello, {user.displayName}</h1>
           <p className="muted text-sm mt-1">{new Date(`${today}T12:00:00Z`).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}</p>
         </div>
         <div className="flex gap-2">
@@ -53,7 +53,7 @@ export default async function DashboardPage() {
 
       {!hasData ? (
         <EmptyState
-          icon="🌱"
+          icon="sprout"
           title="Your cycle story starts here"
           body="Log your first period and Bloom will gently learn your rhythm — always privately, always editable."
           action={<Link className="btn btn-primary" href="/calendar">Log your first period</Link>}
