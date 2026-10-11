@@ -1,3 +1,4 @@
+import { Icon, type IconName } from "@/components/icon";
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/session";
 
@@ -24,13 +25,13 @@ const FAQS = [
   },
 ];
 
-const FEATURES = [
-  { icon: "🌸", title: "Cycle tracking that respects reality", body: "Log periods with flow and notes, edit anything, and see estimates that show their confidence honestly — never invented certainty." },
-  { icon: "📝", title: "A journal that listens", body: "Record symptoms, pain, mood, and energy in seconds. Watch patterns emerge from your own data, with sample sizes shown." },
-  { icon: "🤍", title: "A companion who gets it", body: "Talk through cravings, cramps, or feelings with an empathetic AI that knows its limits — available whenever you need it." },
-  { icon: "🍫", title: "Cravings, honored", body: "Save favorite snacks, drinks, and comforts. Log a craving privately, or share it with someone you trust." },
-  { icon: "🤝", title: "Care, together (if you want)", body: "Invite a partner or best friend with a secure, expiring invitation. Share only what you choose, revoke anytime." },
-  { icon: "🔔", title: "Gentle reminders", body: "Discreet nudges before your estimated period, supply restocks, and care checklists — with quiet hours and full control." },
+const FEATURES: { icon: IconName; title: string; body: string }[] = [
+  { icon: "flower", title: "Cycle tracking that respects reality", body: "Log periods with flow and notes, edit anything, and see estimates that show their confidence honestly — never invented certainty." },
+  { icon: "journal", title: "A journal that listens", body: "Record symptoms, pain, mood, and energy in seconds. Watch patterns emerge from your own data, with sample sizes shown." },
+  { icon: "heart", title: "A companion who gets it", body: "Talk through cravings, cramps, or feelings with an empathetic AI that knows its limits — available whenever you need it." },
+  { icon: "cookie", title: "Cravings, honored", body: "Save favorite snacks, drinks, and comforts. Log a craving privately, or share it with someone you trust." },
+  { icon: "users", title: "Care, together (if you want)", body: "Invite a partner or best friend with a secure, expiring invitation. Share only what you choose, revoke anytime." },
+  { icon: "bell", title: "Gentle reminders", body: "Discreet nudges before your estimated period, supply restocks, and care checklists — with quiet hours and full control." },
 ];
 
 export default async function LandingPage() {
@@ -81,7 +82,7 @@ export default async function LandingPage() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
               {FEATURES.map((f) => (
                 <article key={f.title} className="card p-6 rise">
-                  <span className="feature-icon" aria-hidden>{f.icon}</span>
+                  <span className="feature-icon" aria-hidden><Icon name={f.icon} size={22} /></span>
                   <h3 className="font-display text-lg mt-4">{f.title}</h3>
                   <p className="muted text-sm mt-2">{f.body}</p>
                 </article>

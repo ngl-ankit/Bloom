@@ -1,21 +1,22 @@
 "use client";
 
+import { Icon, type IconName } from "@/components/icon";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ui";
 
-const LINKS = [
-  { href: "/dashboard", label: "Home", icon: "🏠" },
-  { href: "/calendar", label: "Calendar", icon: "🗓️" },
-  { href: "/journal", label: "Log day", icon: "📝" },
-  { href: "/insights", label: "Insights", icon: "📈" },
-  { href: "/companion", label: "Companion", icon: "🤍" },
-  { href: "/cravings", label: "Cravings", icon: "🍫" },
-  { href: "/partner", label: "Trusted person", icon: "🤝" },
-  { href: "/notifications", label: "Notifications", icon: "🔔" },
-  { href: "/learn", label: "Learn", icon: "📚" },
-  { href: "/checklist", label: "Checklist", icon: "🧺" },
-  { href: "/settings", label: "Settings", icon: "⚙️" },
+const LINKS: { href: string; label: string; icon: IconName }[] = [
+  { href: "/dashboard", label: "Home", icon: "home" },
+  { href: "/calendar", label: "Calendar", icon: "calendar" },
+  { href: "/journal", label: "Log day", icon: "journal" },
+  { href: "/insights", label: "Insights", icon: "chart" },
+  { href: "/companion", label: "Companion", icon: "heart" },
+  { href: "/cravings", label: "Cravings", icon: "cookie" },
+  { href: "/partner", label: "Trusted person", icon: "users" },
+  { href: "/notifications", label: "Notifications", icon: "bell" },
+  { href: "/learn", label: "Learn", icon: "book" },
+  { href: "/checklist", label: "Checklist", icon: "checklist" },
+  { href: "/settings", label: "Settings", icon: "settings" },
 ];
 
 const PRIMARY = new Set(["/dashboard", "/calendar", "/journal", "/companion"]);
@@ -44,7 +45,7 @@ export function AppShell({ name, unread, logout, children }: { name: string; unr
                   : "muted hover:bg-[rgb(var(--surface-2))]"
               }`}
             >
-              <span aria-hidden>{l.icon}</span>
+              <Icon name={l.icon} />
               {l.label}
               {l.href === "/notifications" && unread > 0 && (
                 <span className="ml-auto badge-soft !text-[10px] !bg-[rgb(var(--accent))] !text-[rgb(var(--accent-ink))] !border-transparent">
@@ -86,7 +87,7 @@ export function AppShell({ name, unread, logout, children }: { name: string; unr
               active(l.href) ? "font-semibold text-[rgb(var(--accent))]" : "muted"
             }`}
           >
-            <span className="text-lg" aria-hidden>{l.icon}</span>
+            <Icon name={l.icon} size={22} />
             {l.label}
           </Link>
         ))}

@@ -29,7 +29,7 @@ export function PartnerClient({ invitations, pairing }: { invitations: Inv[]; pa
     try {
       const d = await api<{ token: string }>("/api/invitations", { method: "POST", body: JSON.stringify({ email, message: message || undefined }) });
       setInviteLink(`${window.location.origin}/invite/${d.token}`);
-      toast("Invitation created — share the link 💞");
+      toast("Invitation created — share the link");
       setEmail(""); setMessage("");
       router.refresh();
     } catch (e) {
@@ -113,7 +113,7 @@ export function PartnerClient({ invitations, pairing }: { invitations: Inv[]; pa
           {pairing.role === "owner" ? (
             pairing.status === "pending" ? (
               <>
-                <p className="text-sm muted mb-4">They accepted your invitation 🎉 Choose what they may see — everything below starts off.</p>
+                <p className="text-sm muted mb-4">They accepted your invitation Choose what they may see — everything below starts off.</p>
                 {CATEGORIES.map((c) => (
                   <label key={c.key} className="flex items-start gap-3 mb-3 text-sm cursor-pointer surface-2 rounded-2xl p-4">
                     <input type="checkbox" className="mt-1 h-4 w-4 accent-[rgb(var(--accent))]" checked={perms[c.key]} onChange={(e) => setPerms({ ...perms, [c.key]: e.target.checked })} />

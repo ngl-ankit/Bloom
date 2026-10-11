@@ -1,3 +1,4 @@
+import { Icon } from "@/components/icon";
 import { count, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { notifications } from "@/db/schema";
@@ -16,7 +17,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     .where(eq(notifications.userId, user.id));
   const logout = (
     <form action={logoutAction}>
-      <button className="btn-ghost btn !p-2 !min-h-0" aria-label="Log out" title="Log out">⏎</button>
+      <button className="btn-ghost btn !p-2 !min-h-0" aria-label="Log out" title="Log out"><Icon name="logout" /></button>
     </form>
   );
   return (

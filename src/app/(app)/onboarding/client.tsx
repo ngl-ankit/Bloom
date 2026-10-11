@@ -49,7 +49,7 @@ export function OnboardingClient() {
           preferredSupport: preferredSupport || null,
         }),
       });
-      toast("You're all set — welcome to Bloom 🌸");
+      toast("You're all set — welcome to Bloom");
       router.push("/dashboard");
       router.refresh();
     } catch (e) {
@@ -112,7 +112,7 @@ export function OnboardingClient() {
           </div>
           <p className="muted text-xs mb-4">Timezone detected: <strong>{timezone}</strong> — used only so reminders arrive at sane hours.</p>
           <button className="btn btn-primary w-full" disabled={saving} onClick={finish}>
-            {saving ? "Setting things up…" : "Enter Bloom 🌸"}
+            {saving ? "Setting things up…" : "Enter Bloom"}
           </button>
         </section>
       )}

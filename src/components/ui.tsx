@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon, type IconName } from "@/components/icon";
 import { createContext, useCallback, useContext, useEffect, useId, useState } from "react";
 
 // Tiny reusable client UI kit (buttons/inputs are CSS classes in globals.css).
@@ -74,12 +75,12 @@ export function Slider({ label, value, onChange, min = 0, max = 10 }: {
   );
 }
 
-export function EmptyState({ icon = "🌸", title, body, action }: {
-  icon?: string; title: string; body: string; action?: React.ReactNode;
+export function EmptyState({ icon = "flower", title, body, action }: {
+  icon?: IconName; title: string; body: string; action?: React.ReactNode;
 }) {
   return (
     <div className="card p-8 text-center rise">
-      <div className="text-4xl mb-3" aria-hidden>{icon}</div>
+      <div className="mb-4 text-[rgb(var(--accent))]" aria-hidden><Icon name={icon} size={36} /></div>
       <h3 className="font-display text-lg mb-1">{title}</h3>
       <p className="muted text-sm max-w-md mx-auto mb-4">{body}</p>
       {action}
@@ -117,7 +118,7 @@ export function ToastHost({ children }: { children: React.ReactNode }) {
             className={`card px-4 py-3 text-sm rise ${t.kind === "err" ? "border-[rgb(var(--accent))]" : ""}`}
             role="status"
           >
-            {t.kind === "err" ? "⚠️ " : "✿ "}{t.msg}
+            <Icon name={t.kind === "err" ? "alert" : "check"} size={18} className="mr-2 text-[rgb(var(--accent))]" />{t.msg}
           </div>
         ))}
       </div>
@@ -140,7 +141,7 @@ export function ThemeToggle() {
         try { localStorage.setItem("bloom-theme", next ? "dark" : "light"); } catch {}
       }}
     >
-      {dark ? "☀️" : "🌙"}
+      <Icon name={dark ? "sun" : "moon"} />
     </button>
   );
 }

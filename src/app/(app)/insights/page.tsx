@@ -25,7 +25,7 @@ export default async function InsightsPage() {
       <p className="muted text-sm mt-1 mb-6">Every insight below is computed from your own saved records — never from assumptions about your body.</p>
 
       {entries.length === 0 && myPeriods.length === 0 ? (
-        <EmptyState icon="📈" title="Insights bloom with data" body="Log a few days and a couple of periods, and honest patterns — with their sample sizes — will appear here." />
+        <EmptyState icon="chart" title="Insights bloom with data" body="Log a few days and a couple of periods, and honest patterns — with their sample sizes — will appear here." />
       ) : (
         <div className="space-y-4">
           <section className="card p-6">

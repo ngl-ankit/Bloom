@@ -58,7 +58,7 @@ export function JournalClient({ initialEntries }: { initialEntries: Entry[] }) {
       };
       const { entry } = await api<{ entry: Entry }>("/api/journal", { method: "POST", body: JSON.stringify(body) });
       setEntries((prev) => [entry, ...prev.filter((x) => x.recordedOn !== date)].sort((a, b) => b.recordedOn.localeCompare(a.recordedOn)));
-      toast(`Saved ${date} ✓`);
+      toast(`Saved ${date}`);
       router.refresh();
     } catch (e) {
       toast(e instanceof Error ? e.message : "Something went wrong", "err");
@@ -119,7 +119,7 @@ export function JournalClient({ initialEntries }: { initialEntries: Entry[] }) {
       <section aria-label="Past entries">
         <h2 className="font-display text-2xl mb-4">Past entries</h2>
         {entries.length === 0 ? (
-          <EmptyState icon="📝" title="No entries yet" body="Your log is empty right now — saving today's snapshot takes under a minute." />
+          <EmptyState icon="journal" title="No entries yet" body="Your log is empty right now — saving today's snapshot takes under a minute." />
         ) : (
           <ul className="space-y-3">
             {entries.map((e) => (

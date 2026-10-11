@@ -17,7 +17,7 @@ export default async function CarePage() {
       <div className="rise">
         <h1 className="font-display text-3xl mb-6">Care dashboard</h1>
         <EmptyState
-          icon="🤍"
+          icon="heart"
           title="No active pairing"
           body="When someone you care for grants you access, the bits they've chosen — and only those — will appear here."
         />
@@ -29,7 +29,7 @@ export default async function CarePage() {
   const fresh = await db.select().from(pairings).where(and(eq(pairings.id, pairing.id), eq(pairings.status, "active"))).limit(1);
   const p = fresh[0];
   if (!p) {
-    return <EmptyState icon="🤍" title="No active pairing" body="This pairing is no longer active." />;
+    return <EmptyState icon="heart" title="No active pairing" body="This pairing is no longer active." />;
   }
 
   const { buildPartnerView } = await import("@/lib/care");

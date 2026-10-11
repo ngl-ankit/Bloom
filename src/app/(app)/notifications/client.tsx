@@ -36,7 +36,7 @@ export function NotificationsClient({ notifications: initial, prefs: initialPref
     setBusy(true);
     try {
       await api("/api/reminder-preferences", { method: "POST", body: JSON.stringify(prefs) });
-      toast("Reminder preferences saved 🔔");
+      toast("Reminder preferences saved");
       router.refresh();
     } catch (e) {
       toast(e instanceof Error ? e.message : "Couldn't save", "err");
@@ -89,7 +89,7 @@ export function NotificationsClient({ notifications: initial, prefs: initialPref
       <section aria-label="Notification history">
         <h2 className="font-display text-2xl mb-4">History</h2>
         {items.length === 0 ? (
-          <EmptyState icon="🔔" title="All quiet" body="Reminders and gentle care notes will land here when they have something kind to say." />
+          <EmptyState icon="bell" title="All quiet" body="Reminders and gentle care notes will land here when they have something kind to say." />
         ) : (
           <ul className="space-y-2">
             {items.map((n) => (

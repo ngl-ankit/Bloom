@@ -15,10 +15,10 @@ export function newToken(): string {
   return randomBytes(32).toString("base64url");
 }
 
-export async function createSession(userId: string): Promise<void> {
+export async function createSession(userId: string, executor: Pick<typeof db, "insert"> = db): Promise<void> {
   const token = newToken();
   const expiresAt = new Date(Date.now() + SESSION_TTL_DAYS * 86400_000);
-  await db.insert(sessions).values({ userId, tokenHash: hashToken(token), expiresAt });
+  await executor.insert(sessions).values({ userId, tokenHash: hashToken(token), expiresAt });
   const jar = await cookies();
   jar.set(SESSION_COOKIE, token, {
     httpOnly: true,

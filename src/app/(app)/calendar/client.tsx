@@ -63,7 +63,7 @@ export function CalendarClient({ periods: initial }: { periods: PeriodRow[] }) {
       const body = { startDate, endDate: endDate || null, flow: flow || null, notes: notes || null };
       if (editId) await api(`/api/periods/${editId}`, { method: "PUT", body: JSON.stringify(body) });
       else await api("/api/periods", { method: "POST", body: JSON.stringify(body) });
-      toast(editId ? "Entry updated" : "Period logged 🌸");
+      toast(editId ? "Entry updated" : "Period logged");
       setShowForm(false); setEditId(null); setNotes("");
       await refresh();
     } catch (e) {
@@ -103,7 +103,7 @@ export function CalendarClient({ periods: initial }: { periods: PeriodRow[] }) {
       </div>
 
       {rows.length === 0 && !showForm && (
-        <EmptyState icon="🗓️" title="No periods recorded yet" body="Log your first period — start and end dates only, everything is editable later." />
+        <EmptyState icon="calendar" title="No periods recorded yet" body="Log your first period — start and end dates only, everything is editable later." />
       )}
 
       <section className="card p-4 md:p-6 mb-6" aria-label="Menstrual calendar">

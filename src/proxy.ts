@@ -18,9 +18,8 @@ export function proxy(req: NextRequest) {
     url.searchParams.set("next", pathname);
     return NextResponse.redirect(url);
   }
-  if (hasSession && ["/login", "/register"].includes(pathname)) {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
-  }
+  // Cookie presence is not proof of a valid session. Keep auth pages reachable
+  // for expired/revoked cookies instead of looping between login and dashboard.
   return NextResponse.next();
 }
 

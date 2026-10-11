@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@/components/icon";
 import { useEffect, useRef, useState } from "react";
 import { api, EmptyState, useToast } from "@/components/ui";
 
@@ -93,7 +94,7 @@ export function CompanionClient({ aiReady, userName }: { aiReady: boolean; userN
                 >
                   {c.title}
                 </button>
-                <button className="btn-ghost btn !p-1.5 !min-h-0 text-xs" aria-label={`Delete conversation: ${c.title}`} onClick={() => removeConvo(c.id)}>🗑</button>
+                <button className="btn-ghost btn !p-1.5 !min-h-0 text-xs" aria-label={`Delete conversation: ${c.title}`} onClick={() => removeConvo(c.id)}><Icon name="trash" size={16} /></button>
               </li>
             ))}
           </ul>
@@ -104,7 +105,7 @@ export function CompanionClient({ aiReady, userName }: { aiReady: boolean; userN
         <div className="flex-1 overflow-auto p-5 space-y-4">
           {messages.length === 0 ? (
             <div>
-              <h2 className="font-display text-xl">Hi {userName} 🤍</h2>
+              <h2 className="font-display text-xl">Hi {userName}</h2>
               <p className="muted text-sm mt-2 mb-4">
                 Talk about anything on your mind — symptoms, feelings, cravings, rest. I listen, offer general
                 wellness information, and help you reflect on your own logged patterns. I can't diagnose or
