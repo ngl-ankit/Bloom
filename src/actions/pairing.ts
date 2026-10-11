@@ -31,10 +31,17 @@ export async function createInvitation(input: unknown) {
     if (mine.some((p) => p.status === "active" || p.status === "pending"))
       return { error: "You already have a pairing in progress. Disconnect it or revoke the pending invitation first." };
 
+    const pendingInvites = await db
+      .select({ id: invitations.id })
+      .from(invitations)
+      .where(and(eq(invitations.ownerId, user.id), eq(invitations.status, "pending"), gt(invitations.expiresAt, new Date())));
+    if (pendingInvites.length)
+      return { error: "You already have a pending invitation. Revoke it before creating another." };
+
     const invitee = await db.select({ id: users.id }).from(users).where(eq(users.email, data.email)).limit(1);
     if (invitee.length && invitee[0].id === user.id) return { error: "You can't invite yourself." };
-    if (invitee.length)
-      return { error: "That person already has a Bloom account — send them the invitation link; they can accept it while signed in." };
+    // Existing Bloom accounts are fine: they accept the link while signed in —
+    // acceptance below requires the accepting account's email to match.
 
     const token = newToken();
     const rows = await db
@@ -93,6 +100,9 @@ export async function acceptInvitation(token: string) {
     const invite = rows[0];
     if (!invite) return { error: "This invitation is invalid, expired, or revoked." };
     if (invite.ownerId === user.id) return { error: "You can't accept your own invitation." };
+    // The invitation belongs to a specific email — only that account can accept.
+    if (user.email !== invite.email)
+      return { error: "This invitation was issued for a different email address. Sign in with the invited email to accept it." };
 
     const already = await activePairingRows(user.id);
     if (already.some((p) => p.status === "active" || p.status === "pending"))
